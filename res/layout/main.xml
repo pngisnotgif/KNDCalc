@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textViewTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total" />
+
+    <EditText
+        android:id="@+id/editTextTotal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number|numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/person" />
+
+    <EditText
+        android:id="@+id/editTextPersons"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/buttonCalc"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:text="@string/calc" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="fill_parent"
+        android:layout_height="94dp"
+        android:text="@string/result"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>
