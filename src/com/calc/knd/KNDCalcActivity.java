@@ -39,12 +39,7 @@ public class KNDCalcActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        bt_calc = (Button)findViewById(R.id.buttonCalc);
-        tv_Total = (EditText)findViewById(R.id.editTextTotal);
-        tv_Persons = (EditText)findViewById(R.id.editTextPersons);
-        tv_Result = (TextView)findViewById(R.id.textViewResult);
-        
+
         init_views();
     }
     
@@ -53,9 +48,11 @@ public class KNDCalcActivity extends Activity {
      */
     private void init_views() {
         
-        total = Integer.valueOf(tv_Total.getText().toString());
-        persons = Integer.valueOf(tv_Persons.getText().toString());
-        
+        bt_calc = (Button)findViewById(R.id.buttonCalc);
+        tv_Total = (EditText)findViewById(R.id.editTextTotal);
+        tv_Persons = (EditText)findViewById(R.id.editTextPersons);
+        tv_Result = (TextView)findViewById(R.id.textViewResult);    	
+    	        
         bt_calc.setOnClickListener(new Button.OnClickListener()	{
         	private String result;	///< Payment method string.
         	
@@ -69,20 +66,29 @@ public class KNDCalcActivity extends Activity {
         	 * 
         	 */
 			public void onClick(View arg0) {
+				
+				int total2; ///< Temporally use
 
+		    	try {
+			        total = Integer.parseInt(tv_Total.getText().toString());
+			        persons = Integer.parseInt(tv_Persons.getText().toString());
+		    	}
+		    	catch (Exception e) {
+		    		// no contents.
+		    	}	
+		    	
 				try {
 					trialResult = total / persons;
 				}
 				catch(Exception e) {
 					// divided by zero error.
-					
 				}
 				
-				if (trialResult != total) {
-					int total2 = trialResult * persons;
+				total2 = trialResult * persons;
+				if (total2 != total) {
 					p2 = total - total2;
 					pay2 = trialResult + 1;
-					p1 = persons - p1;
+					p1 = persons - p2;
 					pay1 = trialResult;		
 					
 					result = new String(p1 + " ¸öÈËË¢£º" + pay1 +"¿é£»\n");
@@ -96,11 +102,8 @@ public class KNDCalcActivity extends Activity {
 				
 			}
         	
-        	}
-        );
-        
-        
-        
+        } );
+
     }
     
 }

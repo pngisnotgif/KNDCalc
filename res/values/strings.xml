@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">KNDCalc</string>
-    <string name="total">消费总数</string>
-    <string name="person">总人数</string>
-    <string name="calc">计算</string>
-    <string name="result">付费方式</string>
+    <string name="app_name">A-A计算器</string>
+    <string name="total">消费金额：</string>
+    <string name="person">总人数：</string>
+    <string name="calc">算一算</string>
+    <string name="result">付费方式：</string>
+    <string name="hintTotal">在此输入消费总金额（元）</string>
+    <string name="hintPerson">在此输入总人数</string>
 
 </resources>
