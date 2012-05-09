@@ -1,16 +1,16 @@
 /**
  * @file KNDCalcActivity.java
  * 
- * @brief A-A消费计算器.
+ * @brief A-A Calculator(Let's go dutch!)
  * 
- * @detail 总额、人均消费只能使用整数。
+ * @detail Total amount and individual expense should be only in integer.
  * 
  * @author 白峰(baifeng)
- * @date 2012-5-8
+ * @date May 8~9, 2012
  * @version 0.1	Prototype functions.
  */
 
-package com.calc.knd;
+package com.knd.calc;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -26,10 +26,10 @@ import android.widget.TextView;
  */
 public class KNDCalcActivity extends Activity {
 	
-	private EditText tv_Total;		///< 消费总额
-	private EditText tv_Persons;	///< 人数
-	private TextView tv_Result;		///< 支付方式
-	private Button bt_calc;			///< 计算按钮
+	private EditText tv_Total;		///< total amount
+	private EditText tv_Persons;	///< number of persons
+	private TextView tv_Result;		///< payment method
+	private Button bt_calc;			///< calculation button
 	
 	private int total;		///< total 
 	private int persons;	///< number of persons
@@ -53,6 +53,7 @@ public class KNDCalcActivity extends Activity {
         tv_Persons = (EditText)findViewById(R.id.editTextPersons);
         tv_Result = (TextView)findViewById(R.id.textViewResult);    	
     	        
+        //TODO Refactor this function.
         bt_calc.setOnClickListener(new Button.OnClickListener()	{
         	private String result;	///< Payment method string.
         	
@@ -90,6 +91,8 @@ public class KNDCalcActivity extends Activity {
 					pay2 = trialResult + 1;
 					p1 = persons - p2;
 					pay1 = trialResult;		
+					
+					//TODO: made these strings in xml file.
 					
 					result = new String(p1 + " 个人刷：" + pay1 +"块；\n");
 					result += new String(p2 + " 个人刷：" + pay2 +"块；\n");

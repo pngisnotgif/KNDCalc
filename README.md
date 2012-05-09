@@ -1,8 +1,11 @@
-KNDCalc(Let's Go Dutch)
+KNDCalc (Let's Go Dutch)
 =======
 
 A-A calculator in Canteen.
 
-I wrote this app. for A-A payment calculation in my company where cash should be payed only in integral.
+WHY I WROTE THIS:  
+My colleagues and I usually have lunch together for sharing different kinds of delicious dishes.
+But payment of cash must be payed in integer where total could not be divided evenly.
+
 
 Have Fun! 
