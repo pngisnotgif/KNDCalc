@@ -10,14 +10,14 @@
         android:layout_height="wrap_content"
         android:text="@string/total"
         android:textSize="20dp" />
-
+
     <EditText
         android:id="@+id/editTextTotal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/hintTotal"
-        android:inputType="number|numberDecimal" >
+        android:inputType="number" >
 
         <requestFocus />
     </EditText>
@@ -27,20 +27,21 @@
         android:layout_height="wrap_content"
         android:text="@string/person"
         android:textSize="20dp" />
-
+
     <EditText
         android:id="@+id/editTextPersons"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/hintPerson"
-        android:inputType="numberDecimal" />
-
+        android:inputType="number" />
+
     <Button
         android:id="@+id/buttonCalc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/calc" />
+        android:text="@string/calc"
+        android:textSize="20dp" android:imeOptions="actionDone"/>
 
     <TextView
         android:id="@+id/textViewResult"

@@ -7,7 +7,9 @@
  * 
  * @author 白峰(baifeng)
  * @date May 8~9, 2012
+ * 
  * @version 0.1	Prototype functions.
+ * @version 0.1.1 Fixes result display format.
  */
 
 package com.knd.calc;
@@ -55,8 +57,7 @@ public class KNDCalcActivity extends Activity {
     	        
         //TODO Refactor this function.
         bt_calc.setOnClickListener(new Button.OnClickListener()	{
-        	private String result;	///< Payment method string.
-        	
+        	private String result;	 	///< Payment method string.        	
         	private int trialResult;	///< trial result, to test.
         	private int p1;	///< first part, in person
         	private int p2;	///< second part, in person
@@ -65,17 +66,27 @@ public class KNDCalcActivity extends Activity {
         	
         	/**	"onClick" Callback method.
         	 * 
+        	 * @todo TODO: Made all the Chinese strings in xml file.
         	 */
 			public void onClick(View arg0) {
-				
 				int total2; ///< Temporally use
+				String temp_res = new String("");
+				
+				// once click button, lose focuses of both EditTexts.
+				//TODO Hide IME here.
+				tv_Total.clearFocus();
+				tv_Persons.clearFocus();
+				
+				result = getResources().getString(R.string.result);
 
 		    	try {
 			        total = Integer.parseInt(tv_Total.getText().toString());
 			        persons = Integer.parseInt(tv_Persons.getText().toString());
 		    	}
 		    	catch (Exception e) {
-		    		// no contents.
+		    		if (total==0 || persons==0) {
+		    			temp_res = new String("还有地方没输入数值呢！");
+		    		}
 		    	}	
 		    	
 				try {
@@ -83,22 +94,28 @@ public class KNDCalcActivity extends Activity {
 				}
 				catch(Exception e) {
 					// divided by zero error.
+					if (persons==0) {
+						temp_res = new String("见鬼了！你确定人数为0？");
+					}
 				}
 				
-				total2 = trialResult * persons;
-				if (total2 != total) {
-					p2 = total - total2;
-					pay2 = trialResult + 1;
-					p1 = persons - p2;
-					pay1 = trialResult;		
-					
-					//TODO: made these strings in xml file.
-					
-					result = new String(p1 + " 个人刷：" + pay1 +"块；\n");
-					result += new String(p2 + " 个人刷：" + pay2 +"块；\n");
+				if (temp_res.isEmpty()) {
+					total2 = trialResult * persons;
+					if (total2 != total) {
+						p2 = total - total2;
+						pay2 = trialResult + 1;
+						p1 = persons - p2;
+						pay1 = trialResult;		
+						
+						result += new String("\t" + p1 + " 个人刷：" + pay1 +"块；\n");
+						result += new String("\t" + p2 + " 个人刷：" + pay2 +"块。\n");
+					}
+					else {	// easy A-A method.
+						result += new String("每人刷：" + trialResult + "块。");
+					}
 				}
-				else {	// easy A-A method.
-					result = new String("每人刷：" + trialResult + "块。");
+				else {
+					result = temp_res;
 				}
 				
 				tv_Result.setText(result);
