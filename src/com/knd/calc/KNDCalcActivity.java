@@ -10,6 +10,8 @@
  * 
  * @version 0.1	Prototype functions.
  * @version 0.1.1 Fixes result display format.
+ * @version 0.1.2 \t1. Add support of average 0.5; 
+ * 				  \t2. Fix: do not clear result when calc. again. 
  */
 
 package com.knd.calc;
@@ -77,11 +79,9 @@ public class KNDCalcActivity extends Activity {
 				tv_Total.clearFocus();
 				tv_Persons.clearFocus();
 				
-				result = getResources().getString(R.string.result);
-
 		    	try {
-			        total = Integer.parseInt(tv_Total.getText().toString());
-			        persons = Integer.parseInt(tv_Persons.getText().toString());
+			        total = Integer.parseInt(tv_Total.getText().toString());	// fix me: when deleted the digit, total does not refresh
+			        persons = Integer.parseInt(tv_Persons.getText().toString());	// fix me: same as above: persons does not refresh. (maybe need other handles? )
 		    	}
 		    	catch (Exception e) {
 		    		if (total==0 || persons==0) {
@@ -98,17 +98,30 @@ public class KNDCalcActivity extends Activity {
 						temp_res = new String("见鬼了！你确定人数为0？");
 					}
 				}
-				
+							
 				if (temp_res.isEmpty()) {
+					// get default information, clear result before calculation.
+					result = getResources().getString(R.string.result);	
+					
 					total2 = trialResult * persons;
-					if (total2 != total) {
+					
+					if (total2 != total)  {
+						boolean isZeroPointFiveSupported = true;	///< support 0.5 flag
 						p2 = total - total2;
-						pay2 = trialResult + 1;
-						p1 = persons - p2;
-						pay1 = trialResult;		
 						
-						result += new String("\t" + p1 + " 个人刷：" + pay1 +"块；\n");
-						result += new String("\t" + p2 + " 个人刷：" + pay2 +"块。\n");
+						// test if can be divided to 0.5, sometimes the seller support this way.
+						if ( isZeroPointFiveSupported && ( p2 == persons - p2) ) {
+							String doubleResult = Double.toString(((double)total / (double)persons) );
+							result += new String("每人刷：" + doubleResult + "块。");
+						}
+						else {						
+							pay2 = trialResult + 1;
+							p1 = persons - p2;
+							pay1 = trialResult;		
+							
+							result += new String("\t" + p1 + " 个人刷：" + pay1 +"块；\n");
+							result += new String("\t" + p2 + " 个人刷：" + pay2 +"块。\n");
+						}
 					}
 					else {	// easy A-A method.
 						result += new String("每人刷：" + trialResult + "块。");
